@@ -11,7 +11,7 @@ module.exports = {
   },
   etherscan:{
     apiKey:{
-      sepolia:process.env.ETHERSCAN_API_KEY
+      sepolia:process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY
     }
   },
 };
