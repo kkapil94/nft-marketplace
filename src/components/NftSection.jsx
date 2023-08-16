@@ -7,7 +7,7 @@ export default function NftSection(){
     return(
     <>
         <section className="mb-10">
-            <div className="h-full flex items-center gap-4 justify-between px-32 flex-wrap mt-16 cursor-pointer">
+            <div className="h-full flex items-center justify-center gap-24  px-32 flex-wrap mt-16 cursor-pointer">
                 <div className="card bg-white rounded-lg">
                     <div className="img h-64">
                         <img src="/ape.webp" alt="" className="h-full"/>
@@ -88,8 +88,6 @@ export default function NftSection(){
                         <span>0.053 eth</span>
                     </div>
                 </div>
-               
-                
             </div>
         </section>
     
