@@ -39,30 +39,12 @@ export const uploadFileToIPFS = async(file) => {
     data.append('file', file);
 
     const metadata = JSON.stringify({
-        name: 'testname',
+        name: 'Beast',
         keyvalues: {
             exampleKey: 'exampleValue'
         }
     });
     data.append('pinataMetadata', metadata);
-
-    //pinataOptions are optional
-    const pinataOptions = JSON.stringify({
-        cidVersion: 0,
-        customPinPolicy: {
-            regions: [
-                {
-                    id: 'FRA1',
-                    desiredReplicationCount: 1
-                },
-                {
-                    id: 'NYC1',
-                    desiredReplicationCount: 2
-                }
-            ]
-        }
-    });
-    data.append('pinataOptions', pinataOptions);
 
     return axios 
         .post(url, data, {

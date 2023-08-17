@@ -4,6 +4,7 @@ import { useState } from "react"
 
 export default function NftSection(){
     const [allNfts,setAllNfts] = useState(null)
+    
     return(
     <>
         <section className="mb-10">
