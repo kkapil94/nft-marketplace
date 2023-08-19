@@ -6,13 +6,11 @@ import {toast} from "react-toastify"
 import axios from "axios"
 import React, { useEffect, useState } from 'react'
 import { GetIpfsUrlFromPinata } from '@/helpers/pinata';
-import { useRouter } from 'next/navigation';
 
 export default function MyNFTSection() {
   const [myNfts,setMyNfts] = useState([])
   const [user,setUser] = useState()
   const [total,setTotal] = useState(0)
-  const router = useRouter();
   const notify = toast;
   const getMyNfts = async()=>{
     try {
@@ -29,7 +27,6 @@ export default function MyNFTSection() {
         const items = await Promise.all(transaction.map(async i=>{
           let tokenURI = await contract.tokenURI(i.tokenId);
                 tokenURI = GetIpfsUrlFromPinata(tokenURI)
-                console.log(tokenURI);
                 let metaData = await axios.get(tokenURI);
                 metaData = metaData.data
 
@@ -55,7 +52,7 @@ export default function MyNFTSection() {
   }
   useEffect(()=>{
     getMyNfts();
-  })
+  },[])
   return (
     <>
         <section className='my-16'>
@@ -78,8 +75,11 @@ export default function MyNFTSection() {
                   <span>{total}</span>
                 </div>
               </div>
+              <div className='text-center mt-16 text-4xl'>
+              <span >Your NFTs</span>
+              </div>
               <div className="h-full flex items-center justify-between gap-24  px-40 flex-wrap mt-24">
-                {myNfts.length&&myNfts.map(nft=>
+                {myNfts.length?myNfts.map(nft=>
                 (<div className="card bg-white rounded-lg cursor-pointer" key={nft.tokenId} >
                     <div className="img h-64">
                         <img src={nft.image} alt="" className="h-full"/>
@@ -89,7 +89,11 @@ export default function MyNFTSection() {
                         <span>{nft.description}</span> 
                         <span>{nft.price} eth</span>
                     </div>
-                </div>))}
+                </div>)):
+                <div className='flex justify-center w-full'>
+                  <span>No NFTs are listed by you</span>
+                </div>
+                }
             </div>
             </div>
         </section>

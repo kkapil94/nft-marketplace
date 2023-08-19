@@ -7,6 +7,7 @@ import marketplace from "@/Marketplace.json"
 import { GetIpfsUrlFromPinata } from "@/helpers/pinata";
 import {useRouter} from "next/navigation"
 import axios from "axios";
+import Link from "next/link";
 
 export default function NftSection(){
     const [allNfts,setAllNfts] = useState([])
@@ -58,14 +59,15 @@ export default function NftSection(){
         <section className="mb-10">
             <div className="h-full flex items-center justify-between gap-24  px-40 flex-wrap mt-16">
                 {allNfts.length&&allNfts.map(nft=>
-                (<div className="card bg-white rounded-lg cursor-pointer" key={nft.tokenId} onClick={()=>router.push(`/nft/${nft.tokenId}`)}>
+                (
+                <div className="card bg-white rounded-lg cursor-pointer" key={nft.tokenId} onClick={()=>{router.push(`/nft/${nft.tokenId}`)}}>
                     <div className="img h-64">
                         <img src={nft.image} alt="" className="h-full"/>
                     </div>
                     <div className="desc flex flex-col text-black ml-2 gap-1 font-medium">
                         <span>{nft.name}</span>
                         <span>{nft.description}</span> 
-                        <span>{nft.price} eth</span>
+                        <span>{nft.price} eth</span> 
                     </div>
                 </div>))}
             </div>

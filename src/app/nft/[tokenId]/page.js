@@ -1,10 +1,10 @@
-import React from 'react'
+import SingleNFT from "@/components/SingleNFT"
 
-export default function SingleNFT({params}) {
-    console.log(params);
+export default function NFTInfo({params}) {
+
   return (
     <>
-        <SingleNFT/>
+        <SingleNFT tokenId={params.tokenId}/>
     </>
   )
 }
