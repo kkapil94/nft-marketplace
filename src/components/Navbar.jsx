@@ -4,11 +4,13 @@ import { ethers } from "ethers"
 import Link from "next/link"
 import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
+import useStore from "@/app/store"
 
 export default function Navbar(){
 
     const pages = [{name:"Marketplace",url:"/"},{name:"List NFT",url:"/list-nft"},{name:"Profile",url:"/profile"}]
     const [connect,setConnect] = useState(false)
+    const setConnected = useStore(state=>state.setConnected)
     const notify = toast
     const connecWallet =async ()=>{
        try{ const {ethereum} = window;
@@ -18,6 +20,7 @@ export default function Navbar(){
             const provider =new ethers.BrowserProvider(ethereum);
             const signer = await provider.getSigner()
             setConnect(true)
+            setConnected(true)
             toast.success("Wallet is connected");
         }}catch(err){
             notify.error("Request denied by user")
@@ -32,6 +35,7 @@ export default function Navbar(){
             const accounts = await provider.send("eth_accounts");
             if (accounts.length>0) {
                 setConnect(true)
+                setConnected(true)
             }
         }
     }

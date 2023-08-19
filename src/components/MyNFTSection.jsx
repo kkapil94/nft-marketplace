@@ -41,6 +41,7 @@ export default function MyNFTSection() {
                     description: metaData.description,
                 }
                 sumPrice += Number(price);
+                console.log(item);
                 return item;
               }))
               setMyNfts(items)

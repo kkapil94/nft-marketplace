@@ -6,11 +6,13 @@ import {toast} from "react-toastify"
 import marketplace from "@/Marketplace.json"
 import { GetIpfsUrlFromPinata } from "@/helpers/pinata";
 import {useRouter} from "next/navigation"
+import useStore from "@/app/store";
 import axios from "axios";
 import Link from "next/link";
 
 export default function NftSection(){
     const [allNfts,setAllNfts] = useState([])
+    const connected = useStore(state=>state.connected)
     const router = useRouter();
     const notify = toast;
     const getAllNfts =async ()=>{
@@ -18,6 +20,7 @@ export default function NftSection(){
             const {ethereum} = window;
             if (!ethereum) {
                 notify.error("Make sure is metamaskmis installed")
+                return
             }
             const provider = new ethers.BrowserProvider(ethereum);
             const signer = await provider.getSigner();
@@ -51,14 +54,15 @@ export default function NftSection(){
         }
     }
     useEffect(()=>{
-        getAllNfts()
-    },[])
+        console.log(connected);
+       connected&&getAllNfts()
+    },[connected])
     
     return(
     <>
         <section className="mb-10">
             <div className="h-full flex items-center justify-between gap-24  px-40 flex-wrap mt-16">
-                {allNfts.length&&allNfts.map(nft=>
+                {connected?allNfts.length?allNfts.map(nft=>
                 (
                 <div className="card bg-white rounded-lg cursor-pointer" key={nft.tokenId} onClick={()=>{router.push(`/nft/${nft.tokenId}`)}}>
                     <div className="img h-64">
@@ -69,7 +73,8 @@ export default function NftSection(){
                         <span>{nft.description}</span> 
                         <span>{nft.price} eth</span> 
                     </div>
-                </div>))}
+                </div>)):'loading...':
+                <div className="w-full flex items-center justify-center h-[calc(100vh-11rem)] text-4xl"><span>Please connect your wallet</span></div>}
             </div>
         </section>
     
