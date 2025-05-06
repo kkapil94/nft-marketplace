@@ -213,7 +213,7 @@ export default function MyNFTSection() {
                 No NFTs in Your Collection
               </h3>
               <p className="text-gray-600 mb-6 max-w-md">
-                You don't have any NFTs in your collection yet. Start by
+                You don&apos;t have any NFTs in your collection yet. Start by
                 purchasing NFTs from the marketplace.
               </p>
               <button onClick={() => router.push("/")} className="btn-primary">
