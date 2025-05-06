@@ -1,8 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
 
+:root {
+  --primary-color: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary-color: #ec4899;
+  --accent-color: #8b5cf6;
+  --background-light: #f9fafb;
+  --card-bg: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --border-color: #e5e7eb;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -11,13 +22,43 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-*{
-  margin:0;
-  padding:0;
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background-image: linear-gradient( 58.2deg,  rgba(40,91,212,0.73) -3%, rgba(171,53,163,0.45) 49.3%, rgba(255,204,112,0.37) 97.7% );
-    font-family: 'Rubik', sans-serif;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #f6f8ff 0%, #e6eefe 100%);
+  font-family: "Rubik", sans-serif;
+  min-height: 100vh;
+}
+
+/* Card styling */
+.nft-card {
+  @apply bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg border border-gray-100;
+}
+
+.nft-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Button styling */
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply bg-white hover:bg-gray-50 text-indigo-600 font-medium py-2 px-4 rounded-md border border-indigo-200 transition-all duration-200;
+}
+
+.btn-connect {
+  @apply px-4 py-2 rounded-md font-medium transition-all duration-200;
+}
+
+/* Section styling */
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
 }
